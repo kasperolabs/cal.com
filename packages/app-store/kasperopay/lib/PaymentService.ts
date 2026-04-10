@@ -59,10 +59,12 @@ class KasperoPayPaymentService implements IAbstractPaymentService {
       const uid = uuidv4();
 
       // Call KasperoPay API to initialize payment session
+      log.info("KasperoPay: Calling API at", `${KASPEROPAY_API_URL}/pay/init`);
       const initResponse = await fetch(`${KASPEROPAY_API_URL}/pay/init`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          "User-Agent": "Cal.com/KasperoPay",
         },
         body: JSON.stringify({
           merchant_id: this.credentials.merchant_id,
@@ -77,7 +79,9 @@ class KasperoPayPaymentService implements IAbstractPaymentService {
         }),
       });
 
-      const initData: KasperoPayInitResponse = await initResponse.json();
+      const initText = await initResponse.text();
+      log.info("KasperoPay: Response status", initResponse.status, "body preview:", initText.substring(0, 200));
+      const initData: KasperoPayInitResponse = JSON.parse(initText);
 
       if (!initData.success || !initData.session_id) {
         log.error("KasperoPay: Failed to initialize payment", { session_id: initData.session_id, error: initData.error, success: initData.success });
