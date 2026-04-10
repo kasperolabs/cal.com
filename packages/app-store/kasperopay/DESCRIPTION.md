@@ -17,10 +17,10 @@ Accept Kaspa (KAS) payments for your Cal.com bookings with KasperoPay.
 ### How it works
 
 1. Install KasperoPay from the Cal.com App Store
-2. Enter your KasperoPay merchant ID (get one at kaspa-store.com/merchant)
+2. Enter your KasperoPay merchant ID (get one at kasperopay.com/merchant)
 3. Enable payments on your event types
 4. Customers pay with any Kaspa wallet when booking
 
 ### Get Started
 
-Sign up for a free merchant account at [kaspa-store.com/merchant](https://kaspa-store.com/merchant) to get your merchant ID.
+Sign up for a free merchant account at [kasperopay.com/merchant](https://kasperopay.com/merchant) to get your merchant ID.

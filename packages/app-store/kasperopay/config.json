@@ -4,7 +4,7 @@
   "slug": "kasperopay",
   "type": "kasperopay_payment",
   "logo": "icon.svg",
-  "url": "https://kaspa-store.com",
+  "url": "https://kasperopay.com",
   "variant": "payment",
   "categories": ["payment"],
   "publisher": "Kaspero Labs",

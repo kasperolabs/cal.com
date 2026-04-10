@@ -13,7 +13,7 @@ import { kasperopayCredentialKeysSchema } from "./kasperopayCredentialKeysSchema
 
 const log = logger.getSubLogger({ prefix: ["payment-service:kasperopay"] });
 
-const KASPEROPAY_API_URL = process.env.KASPEROPAY_API_URL || "https://kaspa-store.com";
+const KASPEROPAY_API_URL = process.env.KASPEROPAY_API_URL || "https://kasperopay.com";
 
 interface KasperoPayInitResponse {
   success: boolean;
@@ -80,7 +80,7 @@ class KasperoPayPaymentService implements IAbstractPaymentService {
       const initData: KasperoPayInitResponse = await initResponse.json();
 
       if (!initData.success || !initData.session_id) {
-        log.error("KasperoPay: Failed to initialize payment", safeStringify(initData));
+        log.error("KasperoPay: Failed to initialize payment", { session_id: initData.session_id, error: initData.error, success: initData.success });
         throw new Error(initData.error || "Failed to initialize KasperoPay session");
       }
 

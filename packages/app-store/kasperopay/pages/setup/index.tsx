@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useRouter } from "next/navigation";
+import { useRouter } from "next/router";
 
 import { useLocale } from "@calcom/lib/hooks/useLocale";
 import { trpc } from "@calcom/trpc/react";
@@ -88,7 +88,7 @@ export default function KasperoPaySetup(props: IKasperoPaySetupProps) {
                 value={merchantId}
                 onChange={(e) => setMerchantId(e.target.value)}
                 required
-                hint="Get your merchant ID at kaspa-store.com/merchant"
+                hint="Get your merchant ID at kasperopay.com/merchant"
               />
 
               <TextField
@@ -120,7 +120,7 @@ export default function KasperoPaySetup(props: IKasperoPaySetupProps) {
               <p className="text-subtle text-xs">
                 Don&apos;t have a KasperoPay account?{" "}
                 <a
-                  href="https://kaspa-store.com/merchant"
+                  href="https://kasperopay.com/merchant"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-emphasis underline"

@@ -30,7 +30,7 @@ packages/app-store/kasperopay/
 2. Run `yarn app-store` to register the app
 3. Add to `.env.appStore`:
    ```
-   KASPEROPAY_API_URL=https://kaspa-store.com
+   KASPEROPAY_API_URL=https://kasperopay.com
    ```
 4. Run `yarn seed-app-store` to add to database
 
@@ -101,11 +101,11 @@ When payment completes, KasperoPay calls the merchant's webhook URL.
 
 | Variable | Description |
 |----------|-------------|
-| `KASPEROPAY_API_URL` | Base URL for KasperoPay API (default: https://kaspa-store.com) |
+| `KASPEROPAY_API_URL` | Base URL for KasperoPay API (default: https://kasperopay.com) |
 
 ## Testing
 
-1. Create a test merchant at kaspa-store.com/merchant
+1. Create a test merchant at kasperopay.com/merchant
 2. Install app in Cal.com
 3. Configure merchant ID
 4. Create a paid event type

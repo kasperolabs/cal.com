@@ -9,21 +9,24 @@ type KasperoPriceComponentProps = {
 };
 
 export function KasperoPriceComponent({ displaySymbol, price, formattedPrice }: KasperoPriceComponentProps) {
-  const [fiatValue, setFiatValue] = React.useState<string>("loading...");
+    const [fiatValue, setFiatValue] = React.useState<string>("");
 
   React.useEffect(() => {
     (async () => {
       try {
-        // Fetch current KAS/USD rate
-        const response = await fetch("https://kaspa-store.com/api/store/price/kas");
+        const response = await fetch("https://kasperopay.com/api/store/price/kas");
+        if (!response.ok) throw new Error("Rate fetch failed");
         const data = await response.json();
-        const kasToUsd = data.kasToUsd || 0.1;
+        const kasToUsd = data.kasToUsd;
+        if (!kasToUsd || typeof kasToUsd !== "number" || kasToUsd <= 0) {
+          throw new Error("Invalid rate data");
+        }
         const usdValue = price * kasToUsd;
-        setFiatValue(`$${usdValue.toFixed(2)} USD`);
+        setFiatValue(`≈ $${usdValue.toFixed(2)} USD`);
       } catch {
-        setFiatValue("Price unavailable");
-      }
-    })();
+        setFiatValue("");
+        }
+      })();
   }, [price]);
 
   return (

@@ -74,7 +74,7 @@ const EventTypeAppSettingsInterface: EventTypeAppSettingsComponent = ({
                     setAppData("currency", currency);
                   }
                 }}
-                value={price && price > 0 ? price : undefined}
+                value={price !== undefined && price !== null ? price : ""}
               />
             </div>
             <div className="mt-5 w-60">

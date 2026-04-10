@@ -42,7 +42,7 @@ export const KasperoPayPaymentComponent = (props: IKasperoPayPaymentComponentPro
   }
 
   const session = parsedData.data.session;
-  const KASPEROPAY_API = "https://kaspa-store.com";
+  const KASPEROPAY_API = "https://kasperopay.com";
 
   useEffect(() => {
     // Load KasperoPay widget script if not already loaded
@@ -99,6 +99,12 @@ export const KasperoPayPaymentComponent = (props: IKasperoPayPaymentComponentPro
           `${KASPEROPAY_API}/pay/session/${session.session_id}?token=${session.token}`,
           "_blank"
         );
+	// Reset loading state when user returns to this tab
+        const handleFocus = () => {
+          setPaying(false);
+          window.removeEventListener("focus", handleFocus);
+        };
+        window.addEventListener("focus", handleFocus);
       }
     } catch (err) {
       setError((err as Error).message || "Payment failed");
@@ -137,7 +143,7 @@ export const KasperoPayPaymentComponent = (props: IKasperoPayPaymentComponentPro
 
       <div className="mt-4 flex items-center text-xs text-subtle">
         Powered by&nbsp;
-        <a href="https://kaspa-store.com" target="_blank" rel="noopener noreferrer" className="underline">
+        <a href="https://kasperopay.com" target="_blank" rel="noopener noreferrer" className="underline">
           KasperoPay
         </a>
       </div>

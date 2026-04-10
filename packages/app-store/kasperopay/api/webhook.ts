@@ -103,7 +103,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
     const parseCredentials = kasperopayCredentialKeysSchema.safeParse(key);
     if (!parseCredentials.success) {
-      console.error("Invalid credentials:", parseCredentials.error);
+      console.error("KasperoPay: Invalid credential format for payment", payment.id);
       throw new HttpCode({ statusCode: 500, message: "Credentials not valid" });
     }
 
