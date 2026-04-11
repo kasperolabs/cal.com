@@ -33,7 +33,7 @@ export function KasperoPriceComponent({ displaySymbol, price, formattedPrice }: 
     <Tooltip content={fiatValue}>
       <div className="inline-flex items-center justify-center">
         {displaySymbol && <KaspaSymbol className="h-4 w-4 mr-1" />}
-        {formattedPrice} KAS
+        {(price / 100).toFixed(2)} KAS
       </div>
     </Tooltip>
   );

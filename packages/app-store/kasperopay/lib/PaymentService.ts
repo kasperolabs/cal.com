@@ -37,6 +37,14 @@ class KasperoPayPaymentService implements IAbstractPaymentService {
     }
   }
 
+  private convertFromSmallestUnit(amount: number, currency: string): number {
+    const zeroDecimalCurrencies = ["KAS", "JPY", "KRW"];
+    if (zeroDecimalCurrencies.includes(currency.toUpperCase())) {
+      return amount;
+    }
+    return amount / 100;
+  }
+  
   async create(
     payment: Pick<Prisma.PaymentUncheckedCreateInput, "amount" | "currency">,
     bookingId: Booking["id"]
@@ -68,7 +76,7 @@ class KasperoPayPaymentService implements IAbstractPaymentService {
         },
         body: JSON.stringify({
           merchant_id: this.credentials.merchant_id,
-          amount: payment.amount,
+          amount: this.convertFromSmallestUnit(payment.amount, payment.currency),
           currency: payment.currency,
           item: booking.title || "Cal.com Booking",
           metadata: {
@@ -102,7 +110,7 @@ class KasperoPayPaymentService implements IAbstractPaymentService {
               id: bookingId,
             },
           },
-          amount: payment.amount,
+	  amount: this.convertFromSmallestUnit(payment.amount, payment.currency),
           externalId: initData.session_id, // Store KasperoPay session_id
           currency: payment.currency,
           data: Object.assign(

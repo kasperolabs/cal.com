@@ -68,13 +68,20 @@ const EventTypeAppSettingsInterface: EventTypeAppSettingsComponent = ({
                 required
                 className="block w-full rounded-sm border-gray-300 pl-2 pr-12 text-sm"
                 placeholder="Price"
-                onChange={(e) => {
-                  setAppData("price", Number(e.target.value));
-                  if (currency) {
+                 onChange={(e) => {
+                  const val = Number(e.target.value);
+                  // Cal.com stores price in smallest currency unit (cents for USD/EUR/GBP)
+                  // KAS has no subunit, store as-is
+                  const curr = currency || "USD";
+                  const zeroDecimal = ["KAS", "JPY", "KRW"];
+                  setAppData("price", zeroDecimal.includes(curr.toUpperCase()) ? val : Math.round(val * 100)); 
+		 if (currency) {
                     setAppData("currency", currency);
                   }
                 }}
-                value={price !== undefined && price !== null ? price : ""}
+		value={price !== undefined && price !== null
+                  ? (["KAS", "JPY", "KRW"].includes((currency || "USD").toUpperCase()) ? price : price / 100)
+                  : ""}
               />
             </div>
             <div className="mt-5 w-60">
