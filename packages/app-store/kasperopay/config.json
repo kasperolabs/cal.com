@@ -15,5 +15,6 @@
   "__createdUsingCli": true,
   "__template": "event-type-app-card",
   "dirName": "kasperopay",
-  "isOAuth": false
+  "isOAuth": false,
+  "settingsUrl": "/apps/kasperopay/setup"
 }
